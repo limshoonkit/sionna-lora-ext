@@ -1,5 +1,34 @@
 # Running the campus notebooks in VS Code
 
+## D-Link router and three Jetson robots: 2.4 / 5 GHz
+
+Open [2_wifi6_router_jetson_dual_band.ipynb](2_wifi6_router_jetson_dual_band.ipynb),
+select `nvidia/.venv-lora/bin/python`, and **Run All**. It is self-contained and
+uses CPU ray tracing with static plots; the optional viewport appears inside
+the notebook and requires WebGL.
+
+- One **DIR-X3060Z AX3000 router**, three Jetson Orin NX robots with
+  **Intel Wireless-AC 8260** cards and **two 6 dBi antennas/MHF4 pigtails each**.
+- The router is Wi-Fi 6; these clients use **802.11n at 2.4 GHz and 802.11ac
+  at 5 GHz**, not ax. The AX3000 label is not a robot's achievable link rate.
+- Initial stationary robot snapshots: corridor, library and upstairs public
+  computing suite; router in the ground-floor atrium. No robot motion/Doppler
+  or chassis is modeled. Change antenna heights to match the real mounts.
+- Equal 20 MHz bandwidth initially; downlink/uplink signal and SNR, 2×2 MIMO
+  diagnostics, static 3D placement and public-region floor maps on both bands.
+- Edit `AP_XY`, `AP_HEIGHT_M`, `ANTENNA_HEIGHT_M`, `BANDS` and region counts.
+  `N_NODES` counts robots only. Antenna separations, radio powers, noise figures
+  and feed losses remain explicit assumptions pending measurements.
+- Materials are recalculated from the existing manifest at each centre frequency;
+  the 2.4 GHz XML is reused for geometry, without freezing its material values at
+  2.4 GHz when simulating 5 GHz.
+
+Run from the configuration cell after changing settings. Convergence diagnostics
+flag forward/reverse channel differences. The plotted ideal MIMO rate is an
+information-theoretic benchmark, **not Wi-Fi throughput or packet delivery**.
+The 6 dBi antenna rating is user-supplied; its per-band installed pattern and
+pigtail loss are unverified. Detailed assumptions and sources are in the notebook.
+
 ## Six-node 923 MHz peer-to-peer study
 
 Open [1_peer_to_peer_lora_923mhz.ipynb](1_peer_to_peer_lora_923mhz.ipynb), select
